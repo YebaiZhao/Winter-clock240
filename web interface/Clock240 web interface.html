@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CLOCK240 Setting page</title>
+    <style type="text/css">
+    p{
+        font-family: Arial, Helvetica;
+    }
+    label{
+    	font-family: Arial, Helvetica;
+        }
+
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script> <!-->
+    <script src="./scripts/eventHandler.js", type="javascript"></script><!-->
+    <script LANGUAGE="javascript" src="./scripts/eventHandler.js"></script>
+
+</head>
+    <body>
+    	<h1>CLOCK240 SETTING PAGE</h1>
+
+    	<form >
+    	<p> 
+	    	<label for="Photon ID">Photon ID</label>
+	    	<input type="text" name='photon_ID'>
+	    	<label for="Photon Token">Photon Token</label>
+	    	<input type="text" name='photon_Token'>
+        </p>
+        <p>
+            Get current time form the Photon
+            <input type="button" name="get_time" value="Get Time" onClick="getTimePhoton(this.form)">
+        </p>
+        <p>
+            Force the Photon to sync time with the cloud service
+            <input type="button" name="sync_time" value="Sync Time" onClick="syncTimePhoton(this.form)">
+    	</p>
+
+    	<h3 id="time_from_photon">
+    		Current time from the Photon is unknow.
+    	</h3>
+
+        <p>
+            <label> Tell the Minute to turn (+/-, in degree, must be integer)</lable>
+            <input type="text" name='turn_Minute'>
+            <input type="button" name="trunMinuteButton" value="Trun Now" onClick="turnMinutePhoton(this.form)">
+        </p>
+
+        <p>
+            <label> Tell the Hour to turn (+/-, in degree, must be integer)</lable>
+            <input type="text" name='turn_Hour'>
+            <input type="button" name="trunHourButton" value="Trun Now" onClick="turnHourPhoton(this.form)">
+        </p>
+
+    	</form>
+
+
+    </body>
+
+     
+
+</html>

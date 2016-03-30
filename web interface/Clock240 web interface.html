@@ -12,8 +12,7 @@
         }
 
     </style>
-    <script src="http://code.jquery.com/jquery-1.11.1.js"></script> <!-->
-    <script src="./scripts/eventHandler.js", type="javascript"></script><!-->
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script> 
     <script LANGUAGE="javascript" src="./scripts/eventHandler.js"></script>
 
 </head>
@@ -21,37 +20,61 @@
     	<h1>CLOCK240 SETTING PAGE</h1>
 
     	<form >
+
+        <h2>
+            Connection
+        </h2>
     	<p> 
 	    	<label for="Photon ID">Photon ID</label>
-	    	<input type="text" name='photon_ID'>
+	    	<input type="text" name='photon_ID' value="*****">
 	    	<label for="Photon Token">Photon Token</label>
-	    	<input type="text" name='photon_Token'>
+	    	<input type="text" name='photon_Token' value="*****">
         </p>
         <p>
-            Get current time form the Photon
-            <input type="button" name="get_time" value="Get Time" onClick="getTimePhoton(this.form)">
-        </p>
-        <p>
-            Force the Photon to sync time with the cloud service
-            <input type="button" name="sync_time" value="Sync Time" onClick="syncTimePhoton(this.form)">
+            
+            <input type="button" title="Get current time form the Photon" name="get_time" value="Get Time" onClick="getTimePhoton(this.form)">
+       
+            <input type="button" title="Force the Photon to sync time with the cloud service" name="sync_time" value="Sync Time" onClick="syncTimePhoton(this.form)">
     	</p>
 
     	<h3 id="time_from_photon">
-    		Current time from the Photon is unknow.
+    		Current time of the Photon will be here if the connection succeeded.
+            <br>
     	</h3>
 
+        <h2>
+            Control Panel
+        </h2>
+
         <p>
-            <label> Tell the Minute to turn (+/-, in degree, must be integer)</lable>
-            <input type="text" name='turn_Minute'>
+            Turn the Minute Plate
+            <input type="text" name='turn_Minute' maxlength="4" size="4">
+            degree (-360 to 360, integer)
             <input type="button" name="trunMinuteButton" value="Trun Now" onClick="turnMinutePhoton(this.form)">
         </p>
 
         <p>
-            <label> Tell the Hour to turn (+/-, in degree, must be integer)</lable>
-            <input type="text" name='turn_Hour'>
+            Turn the Hour Plate
+            <input type="text" name='turn_Hour' maxlength="3" size="3">
+            degree (0 to 360, integer)
             <input type="button" name="trunHourButton" value="Trun Now" onClick="turnHourPhoton(this.form)">
         </p>
 
+        <p>
+            Move current block:<br>
+            Select color
+             <select name="servo_Color">
+                <option value='0'>Red</option>
+                <option value='1'>Yellow</option>
+                <option value='2'>Green</option>
+                <option value='3'>Blue</option>
+            </select> 
+            and percentage (1~100)
+            <input type="text" name='servo_Percentage' maxlength="3" size="3">
+            %
+            <input type="button" name="moveServo" value="Move" onClick="moveServoPhoton(this.form)">
+
+        </p>
     	</form>
 
 

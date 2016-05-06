@@ -2,39 +2,33 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>CLOCK240 Setting page</title>
+    <title>CLOCK240 Setting page v 0.9</title>
     <style type="text/css">
     p{
         font-family: Arial, Helvetica;
     }
     label{
     	font-family: Arial, Helvetica;
-        }
+    }
 
     </style>
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script> 
     <script LANGUAGE="javascript" src="./scripts/eventHandler.js"></script>
+    <script LANGUAGE="javascript" src="./scripts/jquery.knob.min.js"></script>
 
 </head>
     <body>
-    	<h1>CLOCK240 SETTING PAGE</h1>
+    	<h1>CONTROL THE CLOCK240</h1>
 
     	<form >
 
         <h2>
             Connection
         </h2>
-    	<p> 
-	    	<label for="Photon ID">Photon ID</label>
-	    	<input type="text" name='photon_ID' value="*****">
-	    	<label for="Photon Token">Photon Token</label>
-	    	<input type="text" name='photon_Token' value="*****">
-        </p>
+
         <p>
-            
             <input type="button" title="Get current time form the Photon" name="get_time" value="Get Time" onClick="getTimePhoton(this.form)">
-       
-            <input type="button" title="Force the Photon to sync time with the cloud service" name="sync_time" value="Sync Time" onClick="syncTimePhoton(this.form)">
+
     	</p>
 
     	<h3 id="time_from_photon">
@@ -46,21 +40,62 @@
             Control Panel
         </h2>
 
+
+        <!--need to change
         <p>
             Turn the Minute Plate
             <input type="text" name='turn_Minute' maxlength="4" size="4">
             degree (-360 to 360, integer)
             <input type="button" name="trunMinuteButton" value="Trun Now" onClick="turnMinutePhoton(this.form)">
         </p>
+        -->
 
-        <p>
+        <!--try here-->
+        <div class="demo">
+            Turn the Minute Plate --- degree (-360 to 360, integer)
+            
+            <div class="ival" style="width:80px;text-align:center;font-size:50px;color:#AAA">0</div>
+            
+            <input class="infinite" value="0" data-width="150" data-thickness=".5" data-fgColor="#AAAAAA" data-bgColor="#343434" data-displayInput="false" data-cursor=true>
+            <input type="button" value="Trun Minute Plate" onClick="turnMinutePhoton(this.form,$('div.ival'))">
+        </div>
+
+
+        <!-- <p>
             Turn the Hour Plate
             <input type="text" name='turn_Hour' maxlength="3" size="3">
-            degree (0 to 360, integer)
-            <input type="button" name="trunHourButton" value="Trun Now" onClick="turnHourPhoton(this.form)">
+            degree (0 to 360, integer)-->
+        <p>
+            <input type="button" name="trunHourButton" value="Trun Hour Plate" onClick="turnHourPhoton(this.form)">
+        </p> 
+        <p>
+            Move current block -- Select color and percentage (1~100)
         </p>
 
-        <p>
+    <div class="demo" style="color:#FFF; float:left">
+        <input class="knob yellow" jiji="1" data-width="200" data-displayPrevious=true data-fgColor="Yellow" data-skin="tron" data-thickness=".3" value="1">
+        <input type="button" value="Move" onClick="moveServoPhoton(this.form,$('input.yellow'))">
+    </div>
+
+    <div class="demo" style="color:#FFF; float:left">
+        <input class="knob red" jiji="0" data-width="200" data-displayPrevious=true data-fgColor="Red" data-skin="tron" data-thickness=".3" value="1">
+        <input type="button" value="Move" onClick="moveServoPhoton(this.form,$('input.red'))">
+    </div>
+
+    <div class="demo" style="color:#FFF; float:left">
+        <input class="knob green" jiji="2" data-width="200" data-displayPrevious=true data-fgColor="Green" data-skin="tron" data-thickness=".3" value="1">
+        <input type="button" value="Move" onClick="moveServoPhoton(this.form,$('input.green'))">
+    </div>
+
+    <div class="demo" style="color:#FFF; float:left">
+        <input class="knob blue" jiji="3" data-width="200" data-displayPrevious=true data-fgColor="Blue" data-skin="tron" data-thickness=".3" value="1">
+        <input type="button" value="Move" onClick="moveServoPhoton(this.form,$('input.blue'))">
+    </div>
+
+
+
+        <!--need to change-->
+<!--         <p>
             Move current block:<br>
             Select color
              <select name="servo_Color">
@@ -74,12 +109,96 @@
             %
             <input type="button" name="moveServo" value="Move" onClick="moveServoPhoton(this.form)">
 
-        </p>
+        </p> -->
     	</form>
 
 
     </body>
 
+    <script>
+        // Example of infinite knob, iPod click wheel
+        $(function($) {
+            var v,up=0,down=0,i=0,
+                $ival = $("div.ival"),
+                incr = function() { i++; $ival.html(i); },
+                decr = function() { i--; $ival.html(i); };
+
+            $("input.infinite").knob({
+                min : 0, 
+                max : 20, 
+                stopper : false, 
+                change : function () {
+                    if(v > this.cv){
+                        if(up){
+                            decr();
+                            up=0;
+                        }else{up=1;down=0;}
+                    } else {
+                        if(v < this.cv){
+                            if(down){
+                                incr();
+                                down=0;
+                            }else{down=1;up=0;}
+                        }
+                    }
+                    v = this.cv;
+                }
+            });
+
+
+            $(".knob").knob({
+                change : function (value) {
+                    //console.log("change : " + value);
+                },
+                release : function (value) {
+                    //console.log(this.$.attr('value'));
+                    console.log("release : " + value);
+                },
+                cancel : function () {
+                    console.log("cancel : ", this);
+                },
+                /*format : function (value) {
+                 return value + '%';
+                 },*/
+                draw : function () {
+
+                    // "tron" case
+                    if(this.$.data('skin') == 'tron') {
+
+                        this.cursorExt = 0.3;
+
+                        var a = this.arc(this.cv)  // Arc
+                                , pa                   // Previous arc
+                                , r = 1;
+
+                        this.g.lineWidth = this.lineWidth;
+
+                        if (this.o.displayPrevious) {
+                            pa = this.arc(this.v);
+                            this.g.beginPath();
+                            this.g.strokeStyle = this.pColor;
+                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, pa.s, pa.e, pa.d);
+                            this.g.stroke();
+                        }
+
+                        this.g.beginPath();
+                        this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ;
+                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, a.s, a.e, a.d);
+                        this.g.stroke();
+
+                        this.g.lineWidth = 2;
+                        this.g.beginPath();
+                        this.g.strokeStyle = this.o.fgColor;
+                        this.g.arc( this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+                        this.g.stroke();
+
+                        return false;
+                    }
+                }
+            });
+        })
+
+    </script>
      
 
 </html>

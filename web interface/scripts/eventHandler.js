@@ -1,8 +1,9 @@
 var dateFromPhoton;
+var postURI="https://api.particle.io/v1/devices/21001f001647343337363432/webTuning?access_token=aec31db0e35e7f0969dcfbbf7f417210aa391ac5";
 
 function getTimePhoton(form){ //create the conncetion to the photon and get the time back, set the time in string to the webpage
     console.log("Connecting to the Photon with ID "+form.photon_ID.value);
-    $.post("https://api.particle.io/v1/devices/"+form.photon_ID.value+"/webInterface?access_token="+form.photon_Token.value, 
+    $.post(postURI, 
         {arg: "get T"},
         function(data){
             dateFromPhoton=new Date(data.return_value*1000);
@@ -11,7 +12,7 @@ function getTimePhoton(form){ //create the conncetion to the photon and get the 
     });		
 }
 function syncTimePhoton(form){//force the Photon to sync the time and get the new time back to the webpage
-    $.post("https://api.particle.io/v1/devices/"+form.photon_ID.value+"/webInterface?access_token="+form.photon_Token.value, 
+    $.post(postURI, 
         {arg: "syncT"},
         function(data){
             dateFromPhoton=new Date(data.return_value*1000);
@@ -21,19 +22,21 @@ function syncTimePhoton(form){//force the Photon to sync the time and get the ne
     );     
 }
 
-function turnMinutePhoton(form){
-    var minute_modulated="minTr"+form.turn_Minute.value;
-    $.post("https://api.particle.io/v1/devices/"+form.photon_ID.value+"/webTuning?access_token="+form.photon_Token.value, 
-        {arg:minute_modulated},
-        function(data) {
-            console.log(data);  
-        }
-    );
+
+function turnMinutePhoton(form, minDiv){
+    console.log(minDiv[0].innerText);
+    var minute_modulated="minTr"+minDiv[0].innerText;
+     $.post(postURI, 
+         {arg:minute_modulated},
+         function(data) {
+             console.log(data);  
+         }
+     );
 }
 
 function turnHourPhoton(form){
-    var hour_modulated="houTr"+form.turn_Hour.value;
-    $.post("https://api.particle.io/v1/devices/"+form.photon_ID.value+"/webTuning?access_token="+form.photon_Token.value,
+    var hour_modulated="houTr"+"6";
+    $.post(postURI,
         {arg: hour_modulated},
         function(data) {
             console.log(data);  
@@ -41,13 +44,26 @@ function turnHourPhoton(form){
     );
 }
 
-function moveServoPhoton(form){
+function moveServoPhoton(form, object){
+    console.dir(object[0].value);
+    console.dir(object[0].attributes["jiji"].nodeValue);
+    form.servo_Color.value == object[0].attributes["jiji"].nodeValue;
+    form.servo_Percentage.value == object[0].value;
+
     var servo_modulated="ser "+form.servo_Color.value+form.servo_Percentage.value;
     console.log(servo_modulated);
-    $.post("https://api.particle.io/v1/devices/"+form.photon_ID.value+"/webTuning?access_token="+form.photon_Token.value,
+    $.post(postURI,
         {arg: servo_modulated},
         function(data) {
             console.log(data);  
         }
     );
+}
+
+
+
+function test(object){
+    console.log("testing!!!");
+    console.dir(object[0].innerText);
+
 }

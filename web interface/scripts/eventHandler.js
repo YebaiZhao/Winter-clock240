@@ -35,7 +35,7 @@ function turnMinutePhoton(form, minDiv){
 }
 
 function turnHourPhoton(form){
-    var hour_modulated="houTr"+"6";
+    var hour_modulated="houTr12";
     $.post(postURI,
         {arg: hour_modulated},
         function(data) {
@@ -47,10 +47,10 @@ function turnHourPhoton(form){
 function moveServoPhoton(form, object){
     console.dir(object[0].value);
     console.dir(object[0].attributes["jiji"].nodeValue);
-    form.servo_Color.value == object[0].attributes["jiji"].nodeValue;
-    form.servo_Percentage.value == object[0].value;
+    // form.servo_Color.value == object[0].attributes["jiji"].nodeValue;
+    // form.servo_Percentage.value == object[0].value;
 
-    var servo_modulated="ser "+form.servo_Color.value+form.servo_Percentage.value;
+    var servo_modulated="ser "+object[0].attributes["jiji"].nodeValue+object[0].value;
     console.log(servo_modulated);
     $.post(postURI,
         {arg: servo_modulated},

@@ -3,7 +3,7 @@ body{
 	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: large;
 	text-align: center;
-	width: 90%;
+
 }
 form .demo .ival {
 	margin-left: 20%;
@@ -26,6 +26,11 @@ hr {
     background: #333;
     background-image: linear-gradient(to right, #ccc, #333, #ccc);
 }
+.container-fluid {
+	max-width:90%;
+	padding: 0 0 0 0;
+}
+
 
 
 @media screen and (min-width:992px){

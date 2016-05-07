@@ -1,18 +1,20 @@
 var dateFromPhoton;
 var postURI="https://api.particle.io/v1/devices/21001f001647343337363432/webTuning?access_token=aec31db0e35e7f0969dcfbbf7f417210aa391ac5";
+var postURI_webInterface="https://api.particle.io/v1/devices/21001f001647343337363432/webInterface?access_token=aec31db0e35e7f0969dcfbbf7f417210aa391ac5";
 
 function getTimePhoton(form){ //create the conncetion to the photon and get the time back, set the time in string to the webpage
 
-    $.post(postURI, 
+    $.post(postURI_webInterface,
         {arg: "get T"},
         function(data){
             dateFromPhoton=new Date(data.return_value*1000);
             document.getElementById("time_from_photon").innerHTML="Time from the Photon: "+dateFromPhoton.toTimeString();
             console.log(data);
-    });		
+        }
+    );		
 }
 function syncTimePhoton(form){//force the Photon to sync the time and get the new time back to the webpage
-    $.post(postURI, 
+    $.post(postURI_webInterface, 
         {arg: "syncT"},
         function(data){
             dateFromPhoton=new Date(data.return_value*1000);

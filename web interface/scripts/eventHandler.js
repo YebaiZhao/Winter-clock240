@@ -60,8 +60,6 @@ function moveServoPhoton(form, object){
     );
 }
 
-
-
 function test(object){
     console.log("testing!!!");
     console.dir(object[0].innerText);

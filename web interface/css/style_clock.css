@@ -1,0 +1,50 @@
+@charset "UTF-8";
+body{
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: large;
+	text-align: center;
+	width: 90%;
+}
+form .demo .ival {
+	margin-left: 20%;
+
+}
+.container-fluid form .demo {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+input {
+	color: #007DCD;
+	padding-left: 3px;
+	padding-right: 3px;
+	font-weight: bold;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+
+@media screen and (min-width:992px){
+form section #redknob {
+	float: left;
+	margin-left: 20%;
+}
+form section #greenknob {
+	float: left;
+	margin-left: 20%;
+}
+form section #blueknob {
+	float: right;
+	margin-right: 20%;
+}
+
+
+form section #yellowknob {
+	float: right;
+	margin-right: 20%;
+}
+}

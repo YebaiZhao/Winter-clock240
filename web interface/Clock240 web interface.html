@@ -57,7 +57,7 @@
             <div class="ival" style="width:80px;text-align:center;font-size:50px;color:#AAA">0</div>
             
             <input class="infinite" value="0" data-width="150" data-thickness=".5" data-fgColor="#AAAAAA" data-bgColor="#343434" data-displayInput="false" data-cursor=true>
-            <input type="button" value="Trun Minute Plate" onClick="turnMinutePhoton(this.form,$('div.ival'))">
+            <input type="button" value="Turn Minute Plate" onClick="turnMinutePhoton(this.form,$('div.ival'))">
         </div>
 
 
@@ -66,31 +66,37 @@
             <input type="text" name='turn_Hour' maxlength="3" size="3">
             degree (0 to 360, integer)-->
         <p>
-            <input type="button" name="trunHourButton" value="Trun Hour Plate" onClick="turnHourPhoton(this.form)">
+            <input type="button" name="trunHourButton" value="Turn Hour Plate" onClick="turnHourPhoton(this.form)">
         </p> 
         <p>
             Move current block -- Select color and percentage (1~100)
         </p>
 
-    <div class="demo" style="color:#FFF; float:left">
-        <input class="knob yellow" jiji="1" data-width="200" data-displayPrevious=true data-fgColor="Yellow" data-skin="tron" data-thickness=".3" value="1">
-        <input type="button" value="Move" onClick="moveServoPhoton(this.form,$('input.yellow'))">
-    </div>
-
-    <div class="demo" style="color:#FFF; float:left">
+    <div id="colors_1">
+        <div class="demo" style="color:#FFF; float:left">
         <input class="knob red" jiji="0" data-width="200" data-displayPrevious=true data-fgColor="Red" data-skin="tron" data-thickness=".3" value="1">
         <input type="button" value="Move" onClick="moveServoPhoton(this.form,$('input.red'))">
     </div>
 
-    <div class="demo" style="color:#FFF; float:left">
+    <div class="demo" style="color:#FFF; float:right;">
+        <input class="knob yellow" jiji="1" data-width="200" data-displayPrevious=true data-fgColor="Yellow" data-skin="tron" data-thickness=".3" value="1">
+        <input type="button" value="Move" onClick="moveServoPhoton(this.form,$('input.yellow'))">
+    </div>
+    </div>
+
+    <div id="colors_2">
+        <div class="demo" style="color:#FFF; float:left">
         <input class="knob green" jiji="2" data-width="200" data-displayPrevious=true data-fgColor="Green" data-skin="tron" data-thickness=".3" value="1">
         <input type="button" value="Move" onClick="moveServoPhoton(this.form,$('input.green'))">
     </div>
 
-    <div class="demo" style="color:#FFF; float:left">
+    <div class="demo" style="color:#FFF; float:right;">
         <input class="knob blue" jiji="3" data-width="200" data-displayPrevious=true data-fgColor="Blue" data-skin="tron" data-thickness=".3" value="1">
         <input type="button" value="Move" onClick="moveServoPhoton(this.form,$('input.blue'))">
     </div>
+    </div>
+
+
 
 
 

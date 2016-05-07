@@ -2,7 +2,7 @@ var dateFromPhoton;
 var postURI="https://api.particle.io/v1/devices/21001f001647343337363432/webTuning?access_token=aec31db0e35e7f0969dcfbbf7f417210aa391ac5";
 
 function getTimePhoton(form){ //create the conncetion to the photon and get the time back, set the time in string to the webpage
-    console.log("Connecting to the Photon with ID "+form.photon_ID.value);
+
     $.post(postURI, 
         {arg: "get T"},
         function(data){
